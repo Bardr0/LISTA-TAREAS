@@ -53,6 +53,30 @@ function TodoApp() {
     );
   };
 
+  const marcarComoCompleta = async (notaId) => {
+    try {
+      const nota = notas.find((nota) => nota.id === notaId);
+      const response = await fetch(`http://localhost:3000/notas/${notaId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ completed: !nota.completed }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error al cambiar estado: ${response.status}`);
+      }
+
+      const notaActualizada = await response.json();
+      setNotas(
+        notas.map((nota) => (nota.id === notaId ? notaActualizada : nota))
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   //(props) | (propsComponente)
   //{notas}
   //const {notas}= props
@@ -72,22 +96,27 @@ function TodoApp() {
               {nota.completed ? "✅" : "❌"}
             </span>
             <div className={Styles.iconsContainer}>
-              <SquarePen cursor="Pointer"  onClick={()=>setNotaEditandoId(nota.id)} size={26} />
+              <button onClick={() => marcarComoCompleta(nota.id)}>
+                {nota.completed ? "Desmarcar" : "Completar"}
+              </button>
+              <SquarePen
+                cursor="Pointer"
+                onClick={() => setNotaEditandoId(nota.id)}
+                size={26}
+              />
               <Trash
                 cursor="Pointer"
                 onClick={() => eliminarNota(nota.id)}
                 size={26}
               />
             </div>
-            {
-              notaEditandoId == nota.id && (
-                <EditNoteForm 
-                nota = {nota}
+            {notaEditandoId == nota.id && (
+              <EditNoteForm
+                nota={nota}
                 onEditNota={actualizarNota}
-                onCancelar = {()=> setNotaEditandoId(null)}
-                />
-              )
-            }
+                onCancelar={() => setNotaEditandoId(null)}
+              />
+            )}
           </li>
         ))}
       </ul>
