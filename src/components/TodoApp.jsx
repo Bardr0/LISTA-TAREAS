@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Styles from "./todoApp.module.css";
 import TodoForm from "./TodoForm/TodoForm";
-import {SquarePen,  Trash} from "lucide-react"
+import {Pointer, SquarePen,  Trash} from "lucide-react"
 
 function TodoApp() {
   const [notas, setNotas] = useState([]);
@@ -28,6 +28,21 @@ function TodoApp() {
 
   const agregarNota =  (nuevaNota) => {
     setNotas([...notas, nuevaNota])
+
+  }
+
+  const eliminarNota = (id) =>{
+    setNotas(notas.filter(nota=>nota.id != id))
+    fetch(`http://localhost:3000/notas/${id}`, {
+      method: "DELETE"
+    } )
+    .then(response=>{
+      if(!response.ok){
+        throw new Error(`Error al eliminar la nota: ${response.status}`)
+      };
+      console.log("Nota eliminada")
+    })
+    .catch(error=> console.error(error))
   }
  
 
@@ -49,8 +64,8 @@ function TodoApp() {
               {nota.text}{nota.completed ? "✅" : "❌"}
             </span>
             <div className={Styles.iconsContainer}>
-              <SquarePen size={16} />
-              <Trash size={16} />
+              <SquarePen cursor="Pointer" size={26} />
+              <Trash cursor="Pointer" onClick={() => eliminarNota(nota.id)} size={26} />
             </div>
           </li>
         ))}
