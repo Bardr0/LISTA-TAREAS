@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Styles from "./todoApp.module.css";
-import TodoForm from "./TodoForm";
+import TodoForm from "./TodoForm/TodoForm";
+import {SquarePen,  Trash} from "lucide-react"
 
 function TodoApp() {
   const [notas, setNotas] = useState([]);
@@ -9,14 +10,14 @@ function TodoApp() {
   useEffect(()=>{
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/notas")
+        const response = await fetch("http://localhost:3000/notas" )
 
         if(!response.ok){
           throw new Error(`Error http: ${response.status}`)
         }
 
         const data = await response.json();
-        setNotas(data);
+        setNotas(data);  
       } catch (error) {
         console.log(error);
         
@@ -44,7 +45,13 @@ function TodoApp() {
       <ul className={Styles.noteList}>
         {notas.map((nota) => (
           <li className={Styles.noteItem} key={nota.id}>
-            {nota.text}{nota.completed ? "✅" : "❌"}
+            <span>
+              {nota.text}{nota.completed ? "✅" : "❌"}
+            </span>
+            <div className={Styles.iconsContainer}>
+              <SquarePen size={16} />
+              <Trash size={16} />
+            </div>
           </li>
         ))}
       </ul>

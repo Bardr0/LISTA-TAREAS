@@ -1,19 +1,29 @@
 {
-    "notas": [
-        {
-            "id": 1,
-            "text": "Aprender react",
-            "completed": false
-        },
-        {
-            "id": 2,
-            "text": "Hacer Ejercicio",
-            "completed": true
-        },
-        {
-            "id": 2,
-            "text": "Leer un libro",
-            "completed": false
-        }
-    ]
+  "notas": [
+    {
+      "id": "1",
+      "text": "Aprender react",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "text": "Hacer Ejercicio",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "text": "Leer un libro",
+      "completed": false
+    },
+    {
+      "id": "5155",
+      "text": "hola",
+      "completed": false
+    },
+    {
+      "id": "357c",
+      "text": "Señal",
+      "completed": false
+    }
+  ]
 }
