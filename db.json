@@ -1,0 +1,19 @@
+{
+    "notas": [
+        {
+            "id": 1,
+            "text": "Aprender react",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "text": "Hacer Ejercicio",
+            "completed": true
+        },
+        {
+            "id": 2,
+            "text": "Leer un libro",
+            "completed": false
+        }
+    ]
+}

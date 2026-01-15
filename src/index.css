@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #222;
+  color: #fff;
+  font-family: system-ui;
+  display: grid;
+  height: 100dvh;
+  padding: 0 15px;
+}
+
+button{
+  border: 0;
+  padding: 10px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+
+.containerTodoApp{
+  width: 100%;
+  max-width: 500px;
+  margin: 100px auto 0 auto;
+}
